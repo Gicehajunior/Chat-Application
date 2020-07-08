@@ -39,6 +39,7 @@ function appendMessage(message, ){
 
     if(!message.includes("Joe Biden")){
         MessageElement.style.marginTop = "15px"
+        MessageElement.style.marginBottom = "15px"
         MessageElement.style.padding = "15px"
         MessageElement.style.paddingLeft = "-50%"
         MessageElement.style.textAlign = "right"
@@ -46,6 +47,7 @@ function appendMessage(message, ){
     }
     else{
         MessageElement.style.marginTop = "15px"
+        MessageElement.style.marginBottom = "15px"
         MessageElement.style.padding = "15px"
         MessageElement.style.paddingLeft = "-50%"
         MessageElement.style.backgroundColor = "lightblue"
