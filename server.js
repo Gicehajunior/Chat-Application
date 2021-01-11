@@ -1,26 +1,20 @@
-// instantiating the socket obeject
-const io = require ('socket.io')(3000)
+import dotenv from 'dotenv';
+dotenv.config();
+import express from 'express';
+import configViewEngine from "./config/ConfigEngine";
+import routeService from './routes/web';
 
-const Users = {}
+// express app instance
+const app = express();
 
-io.on('connection', socket => {
-    socket.on('New-User', username => {
-        Users[socket.id] = username
-        socket.broadcast.emit('User-Connected', username)
-    })
+// config view engine
+configViewEngine(app);
 
-    socket.on('send-chat-message', message => {
-        socket.broadcast.emit('chat-message', {
-            message: message,
-            username: Users[socket.id]
-        })
-    })
+// routing service
+routeService(app);
 
-    socket.on('disconnect', () => {
-        socket.broadcast.emit('User-Disconnected', Users[socket.id])
-        delete Users[socket.id]
-    })
+// app listens on...
+app.listen(process.env.RUN_APP_PORT, (req, res) => {
+    console.log(`App Listening on ${process.env.APP_HOST} port: ${process.env.RUN_APP_PORT} `);
 })
-
-
 
